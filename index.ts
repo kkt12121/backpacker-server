@@ -4,6 +4,8 @@ import https from "https";
 import fs from "fs";
 import { json } from "body-parser";
 import cors from "cors";
+// import axios from "axios";
+import routes from "./routes";
 
 const port = 4000;
 const app = express();
@@ -30,9 +32,36 @@ app.use(
   })
 );
 
-app.get("/", function (req, res) {
-  res.send("<h1>hi friend!</h1>");
-});
+// const host = "http://apis.data.go.kr/B553077/api/open/sdsc";
+// const url = host;
+// const servicekey =
+//   "2jWxf3CaG6XsNPtd02pim26GqE1uW7iuF81ySXD%2FjoUXGDSovXRWcKwD%2BI%2BEk3piykabTG8zGajcwQJJPrbf2A%3D%3D";
+
+// const api = `http://apis.data.go.kr/B553077/api/open/sdsc?ServiceKey=${servicekey}&type=json`;
+// const curPut = async () => {
+//   let response;
+//   try {
+//     response = await axios.get(api);
+//   } catch (e) {
+//     console.log(e);
+//   }
+//   return response;
+// };
+// // console.log(curPut);
+// app.get("/api", (req, res) => {
+//   curPut().then((response: any) => {
+//     console.log(response);
+//     res.setHeader("Access-Control-Allow-Origin", "*");
+//     res.json(response.data.response.body);
+//   });
+// });
+
+// 라우터
+app.use("/user", routes.user);
+
+// app.get("/", function (req, res) {
+//   res.send("<h1>hi friend!</h1>");
+// });
 
 let server;
 

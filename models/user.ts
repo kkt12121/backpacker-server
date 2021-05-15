@@ -5,6 +5,7 @@ interface IUser {
   email: string;
   password: string;
   nickname: string;
+  refreshToken?: string;
 }
 
 interface userModelInterface extends mongoose.Model<UserDoc> {
@@ -16,6 +17,7 @@ interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
   nickname: string;
+  refreshToken?: string;
 }
 
 const users = new mongoose.Schema({
@@ -38,6 +40,9 @@ const users = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+  },
+  refreshToken: {
+    type: String,
   },
 });
 
