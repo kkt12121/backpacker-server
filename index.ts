@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import https from "https";
 import fs from "fs";
 import { json } from "body-parser";
@@ -6,6 +7,18 @@ import cors from "cors";
 
 const port = 4000;
 const app = express();
+
+mongoose.connect(
+  "mongodb://localhost:27017/backpacker",
+  {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  () => {
+    console.log("connected to database");
+  }
+);
 
 app.use(json());
 app.use(
