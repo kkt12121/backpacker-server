@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/kkt12121/backpacker-server#readme",
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.11",
     "@types/jsonwebtoken": "^8.5.1",
