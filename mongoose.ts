@@ -25,6 +25,7 @@ const newUser = user.build({
   email: "test@test",
   password: "0000",
   nickname: "코린이",
+  phone: "010-1234-5678",
 });
 
 newUser.save(function (error) {
