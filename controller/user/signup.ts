@@ -7,7 +7,7 @@ export default async (
   res: Response
 ): Promise<void | Response> => {
   try {
-    const { email, nickname, name, password } = req.body;
+    const { email, nickname, name, password, phone } = req.body;
 
     // 이미 존재하는 이메일인지 확인
     const userEmail = await user.findOne({ email: email });
@@ -35,6 +35,7 @@ export default async (
         email: email,
         password: password,
         nickname: nickname,
+        phone: phone,
       });
       await newUser.save();
       return res.status(201).json({
@@ -42,9 +43,11 @@ export default async (
         password: newUser.password,
         name: newUser.name,
         nickname: newUser.nickname,
+        phone: newUser.phone,
       });
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json(err);
   }
 };

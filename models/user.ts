@@ -5,6 +5,7 @@ interface IUser {
   email: string;
   password: string;
   nickname: string;
+  phone: string;
   refreshToken?: string;
 }
 
@@ -17,6 +18,7 @@ interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
   nickname: string;
+  phone: string;
   refreshToken?: string;
 }
 
@@ -37,6 +39,11 @@ const users = new mongoose.Schema({
     trim: true,
   },
   nickname: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  phone: {
     type: String,
     required: true,
     trim: true,
