@@ -9,5 +9,7 @@ router.put("/:id/update", auth, contentController.contentUpdate);
 router.delete("/:id/delete", auth, contentController.contentDelete);
 router.put("/:id/:itemId/itemUpdate", auth, contentController.itemUpdate);
 router.delete("/:id/:itemId/itemDelete", auth, contentController.itemDelete);
+router.get("/:id", contentController.contentPage);
+router.post("/list", contentController.contentList);
 
 export default router;
