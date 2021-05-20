@@ -27,13 +27,13 @@ export default async (
       process.env.JWT_ACCESS_SECRET,
       { expiresIn: "5h" }
     );
-    console.log("accessToken입니다!!!!!!!!!!!", accessToken);
+    // console.log("accessToken입니다!!!!!!!!!!!", accessToken);
     const refreshToken = jwt.sign(
       { _id: userInfo._id },
       process.env.JWT_REFRESH_SECRET,
       { expiresIn: "1d" }
     );
-    console.log("refreshToken입니다!!!!!!!!!!!", refreshToken);
+    // console.log("refreshToken입니다!!!!!!!!!!!", refreshToken);
     await user.updateOne(
       { _id: userInfo._id },
       { $set: { refreshToken: refreshToken } },

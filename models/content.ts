@@ -3,11 +3,16 @@ import mongoose from "mongoose";
 interface IContent {
   callinder: string;
   totalCost: number;
+  thumbnail: string[];
   day: string[];
-  tag: string[];
-  items: string[];
+  touristSpot: string;
+  items: any[];
   userinfo: string;
 }
+
+// type: [mongoose.Schema.Types.ObjectId],
+// ref: "item",
+// required: true,
 
 interface contentModelInterface extends mongoose.Model<ContentDoc> {
   build(attr: IContent): ContentDoc;
@@ -16,9 +21,10 @@ interface contentModelInterface extends mongoose.Model<ContentDoc> {
 interface ContentDoc extends mongoose.Document {
   callinder: string;
   totalCost: number;
+  thumbnail: string[];
   day: string[];
-  tag: string[];
-  items: string[];
+  touristSpot: string;
+  items: any[];
   userinfo: string;
 }
 
@@ -30,15 +36,15 @@ const contents = new mongoose.Schema({
   },
   totalCost: {
     type: Number,
-    default: 0,
     required: true,
   },
-  items: [
+  thumbnail: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "item",
-      required: true,
+      type: String,
     },
+  ],
+  items: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "item", required: true },
   ],
   day: [
     {
@@ -47,19 +53,47 @@ const contents = new mongoose.Schema({
       trip: true,
     },
   ],
-  tag: [
-    {
-      type: String,
-      required: true,
-      trim: true,
-    },
-  ],
+  touristSpot: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+
   userinfo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
     // required: true,
   },
 });
+
+// items: [
+//   {
+//     place: {
+//       type: String,
+//       trim: true,
+//     },
+//     cost: {
+//       type: Number,
+//       trim: true,
+//       default: 0,
+//     },
+//     img: {
+//       type: String,
+//       trim: true,
+//     },
+//     averageCost: {
+//       type: Number,
+//       required: true,
+//       trim: true,
+//       default: 0,
+//     },
+//     userinfo: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       required: true,
+//       trim: true,
+//     },
+//   },
+// ],
 
 contents.statics.build = (attr: IContent) => {
   return new content(attr);

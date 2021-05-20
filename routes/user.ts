@@ -1,10 +1,10 @@
 import express from "express";
 const router = express.Router();
-// import auth from "./auth";
+import auth from "./auth";
 
 const { userController } = require("../controller");
 
-// router.get("/", auth);
+router.get("/", auth);
 router.post("/signup", userController.signup);
 router.post("/login", userController.login);
 router.post("/oauth", userController.oauth);
