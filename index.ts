@@ -4,9 +4,10 @@ import https from "https";
 import fs from "fs";
 import { json } from "body-parser";
 import cors from "cors";
-import axios from "axios";
 import routes from "./routes";
+import "dotenv/config";
 
+const atlas = process.env.ATLAS_URI;
 const port = 4000;
 const app = express();
 
@@ -22,6 +23,19 @@ mongoose.connect(
   }
 );
 
+// 배포용 아틀라스 연결
+// mongoose.connect(
+//   atlas,
+//   {
+//     useCreateIndex: true,
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   },
+//   () => {
+//     console.log("connected to database");
+//   }
+// );
+
 app.use(json());
 app.use(
   cors({
@@ -33,20 +47,12 @@ app.use(
 );
 // 라우터
 app.use("/user", routes.user);
+app.use("/content", routes.content);
+app.use("/api", routes.api);
 
-const url =
-  "http://apis.data.go.kr/B553077/api/open/sdsc/storeOne?key=19911025&ServiceKey=2jWxf3CaG6XsNPtd02pim26GqE1uW7iuF81ySXD%2FjoUXGDSovXRWcKwD%2BI%2BEk3piykabTG8zGajcwQJJPrbf2A%3D%3D&type=json";
-
-app.get("/api", (req, res) => {
-  axios.get(url).then((data) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.json(data.data.body);
-  });
+app.get("/", function (req, res) {
+  res.send("<h1>hi friend!</h1>");
 });
-
-// app.get("/", function (req, res) {
-//   res.send("<h1>hi friend!</h1>");
-// });
 
 let server;
 

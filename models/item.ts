@@ -2,7 +2,9 @@ import mongoose from "mongoose";
 
 interface IItem {
   place: string;
+  // 평균값을 내가 보내줘야함
   cost: number;
+  averageCost: number;
   img: string;
   userinfo: string;
 }
@@ -14,6 +16,7 @@ interface itemModelInterface extends mongoose.Model<ItemDoc> {
 interface ItemDoc extends mongoose.Document {
   place: string;
   cost: number;
+  averageCost: number;
   img: string;
   userinfo: string;
 }
@@ -25,6 +28,11 @@ const items = new mongoose.Schema({
     trim: true,
   },
   cost: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+  averageCost: {
     type: Number,
     required: true,
     default: 0,
