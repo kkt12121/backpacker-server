@@ -8,8 +8,16 @@ export default async (
   next: NextFunction
 ): Promise<void | Response> => {
   try {
-    const { callinder, totalCost, day, thumbnail, touristSpot, items } =
-      req.body;
+    const {
+      callinder,
+      totalCost,
+      day,
+      thumbnail,
+      touristSpot,
+      items,
+      title,
+      touristRegion,
+    } = req.body;
     // const itemCost = await item.find({ place: place });
     // console.log(itemCost);
     const userId = res.locals.id;
@@ -86,6 +94,8 @@ export default async (
           callinder: callinder,
           thumbnail: thumbnail,
           totalCost: totalCost,
+          title: title,
+          touristRegion: touristRegion,
           day: day,
           touristSpot: touristSpot,
           items: idArr,
@@ -96,6 +106,8 @@ export default async (
           callinder: callinder,
           totalCost: totalCost,
           thumbnail: thumbnail,
+          title: title,
+          touristRegion: touristRegion,
           day: day,
           touristSpot: touristSpot,
           items: items,

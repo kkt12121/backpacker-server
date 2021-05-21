@@ -5,6 +5,8 @@ interface IContent {
   totalCost: number;
   thumbnail: string[];
   day: string[];
+  title: string;
+  touristRegion: string;
   touristSpot: string;
   items: any[];
   userinfo: string;
@@ -23,6 +25,8 @@ interface ContentDoc extends mongoose.Document {
   totalCost: number;
   thumbnail: string[];
   day: string[];
+  title: string;
+  touristRegion: string;
   touristSpot: string;
   items: any[];
   userinfo: string;
@@ -58,7 +62,16 @@ const contents = new mongoose.Schema({
     required: true,
     trim: true,
   },
-
+  touristRegion: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  title: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   userinfo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
