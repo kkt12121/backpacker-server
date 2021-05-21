@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import https from "https";
 import fs from "fs";
+import cookieParser from "cookie-parser";
 import { json } from "body-parser";
 import cors from "cors";
 import routes from "./routes";
@@ -36,6 +37,7 @@ mongoose.connect(
 //   }
 // );
 
+app.use(cookieParser());
 app.use(json());
 app.use(
   cors({
@@ -49,6 +51,7 @@ app.use(
 app.use("/user", routes.user);
 app.use("/content", routes.content);
 app.use("/api", routes.api);
+app.use("/mypage", routes.mypage);
 
 app.get("/", function (req, res) {
   res.send("<h1>hi friend!</h1>");
