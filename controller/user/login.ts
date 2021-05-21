@@ -43,6 +43,7 @@ export default async (
           console.log(err);
         } else {
           return res
+            .cookie("accessToken", accessToken)
             .set("refresh-Token", refreshToken)
             .set("Access-Control-Expose-Headers", "refresh-Token")
             .status(200)
