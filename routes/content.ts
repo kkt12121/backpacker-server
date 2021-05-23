@@ -1,14 +1,18 @@
 import express from "express";
 const router = express.Router();
-import auth from "./auth";
+import checkToken from "./checkToken";
 
 const { contentController } = require("../controller");
 
-router.post("/create", auth, contentController.contentCreate);
-router.put("/:id/update", auth, contentController.contentUpdate);
-router.delete("/:id/delete", auth, contentController.contentDelete);
-router.put("/:id/:itemId/itemUpdate", auth, contentController.itemUpdate);
-router.delete("/:id/:itemId/itemDelete", auth, contentController.itemDelete);
+router.post("/create", checkToken, contentController.contentCreate);
+router.put("/:id/update", checkToken, contentController.contentUpdate);
+router.delete("/:id/delete", checkToken, contentController.contentDelete);
+router.put("/:id/:itemId/itemUpdate", checkToken, contentController.itemUpdate);
+router.delete(
+  "/:id/:itemId/itemDelete",
+  checkToken,
+  contentController.itemDelete
+);
 router.get("/:id", contentController.contentPage);
 router.post("/list", contentController.contentList);
 

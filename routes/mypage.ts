@@ -1,13 +1,13 @@
 import express from "express";
 const router = express.Router();
-import auth from "./auth";
+import checkToken from "./checkToken";
 
 const { mypageController } = require("../controller");
 
-router.get("/userInfo", auth, mypageController.userInfo);
-router.get("/userContent", auth, mypageController.userContent);
-router.put("/userUpdate", auth, mypageController.userUpdate);
-router.delete("/userDelete", auth, mypageController.userDelete);
-router.post("/logout", auth, mypageController.logout);
+router.get("/userInfo", checkToken, mypageController.userInfo);
+router.get("/userContent", checkToken, mypageController.userContent);
+router.put("/userUpdate", checkToken, mypageController.userUpdate);
+router.delete("/userDelete", checkToken, mypageController.userDelete);
+router.post("/logout", checkToken, mypageController.logout);
 
 export default router;

@@ -1,10 +1,10 @@
 import express from "express";
 const router = express.Router();
-import auth from "./auth";
+import checkToken from "./checkToken";
 
 const { userController } = require("../controller");
 
-router.get("/", auth);
+router.get("/", checkToken);
 router.post("/signup", userController.signup);
 router.post("/login", userController.login);
 router.post("/oauth", userController.oauth);
