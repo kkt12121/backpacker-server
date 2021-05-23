@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import validator from "validator";
+import bcrypt from "bcrypt";
 import { user } from "../../models/user";
 
 export default async (
@@ -7,7 +8,7 @@ export default async (
   res: Response
 ): Promise<void | Response> => {
   try {
-    const { email, nickname, name, password, phone } = req.body;
+    let { email, nickname, name, password, phone } = req.body;
 
     // 이미 존재하는 이메일인지 확인
     const userEmail = await user.findOne({ email: email });
@@ -28,24 +29,41 @@ export default async (
       return res
         .status(400)
         .json({ message: "올바른 이메일 형식이 아닙니다 !" });
-    } else {
-      // 이메일 형식이 유효하다면 회원가입을 할수있다
-      const newUser = user.build({
-        name: name,
-        email: email,
-        password: password,
-        nickname: nickname,
-        phone: phone,
-      });
-      await newUser.save();
-      return res.status(201).json({
-        email: newUser.email,
-        password: newUser.password,
-        name: newUser.name,
-        nickname: newUser.nickname,
-        phone: newUser.phone,
-      });
     }
+
+    // 솔트생성 및 해쉬화 진행
+    bcrypt.genSalt(10, (err, salt) => {
+      // 솔트생성 실패시 오류 메세지 전송
+      if (err) {
+        return res.status(400).json({ message: "솔트생성에 실패했습니다 !" });
+      }
+      console.log("salt입니다 = ", salt);
+      // 솔트생성 성공시 해쉬화 진행
+      bcrypt.hash(password, salt, async (err, hash) => {
+        if (err)
+          return res.status(400).json({
+            message: "비밀번호 해쉬화에 실패했습니다.",
+          });
+        console.log("hash입니다 = ", hash);
+        password = hash;
+        // 비밀번호 해쉬화 성공시 회원가입 완료
+        const newUser = user.build({
+          name: name,
+          email: email,
+          password: password,
+          nickname: nickname,
+          phone: phone,
+        });
+        await newUser.save();
+        return res.status(201).json({
+          email: newUser.email,
+          password: newUser.password,
+          name: newUser.name,
+          nickname: newUser.nickname,
+          phone: newUser.phone,
+        });
+      });
+    });
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);

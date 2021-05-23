@@ -14,8 +14,16 @@ export default async (
     } else {
       const userFind: any = await user.findOne({ _id: userId });
       if (userFind) {
+        await user.updateOne(
+          { _id: userFind._id },
+          {
+            $set: {
+              refreshToken: null,
+            },
+          }
+        );
         res
-          .clearCookie("accessToken")
+          .clearCookie("hashPw")
           .status(200)
           .send({ message: "로그아웃 성공 !" });
       } else {

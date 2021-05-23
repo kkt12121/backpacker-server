@@ -6,7 +6,7 @@ interface IUser {
   password: string;
   nickname: string;
   phone: string;
-  refreshToken?: string;
+  refreshToken?: string | null;
 }
 
 interface userModelInterface extends mongoose.Model<UserDoc> {
@@ -19,7 +19,7 @@ interface UserDoc extends mongoose.Document {
   password: string;
   nickname: string;
   phone: string;
-  refreshToken?: string;
+  refreshToken?: string | null;
 }
 
 const users = new mongoose.Schema({

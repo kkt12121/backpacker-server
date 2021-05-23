@@ -7,7 +7,6 @@ export default async (
   next: NextFunction
 ): Promise<void | Response> => {
   try {
-    console.log(res.locals.id);
     const userId = res.locals.id;
     if (!userId) {
       return res.status(401).json({ message: "로그인 상태가 아닙니다 !" });
