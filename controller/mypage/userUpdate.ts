@@ -57,9 +57,7 @@ export default async (
       }
       // nickname 수정
       if (nickname) {
-        const findNickName = await user.find({
-          $and: [{ _id: { $ne: userId } }, { nickname: nickname }],
-        });
+        const findNickName = await user.find({ nickname: nickname });
         // 이미 사용중인 nickname이면 경고
         if (findNickName.length !== 0) {
           return res
