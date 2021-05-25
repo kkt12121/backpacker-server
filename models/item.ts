@@ -6,7 +6,7 @@ interface IItem {
   cost: number;
   averageCost: number;
   img: string;
-  userinfo: string;
+  userinfo: string[];
 }
 
 interface itemModelInterface extends mongoose.Model<ItemDoc> {
@@ -18,7 +18,7 @@ interface ItemDoc extends mongoose.Document {
   cost: number;
   averageCost: number;
   img: string;
-  userinfo: string;
+  userinfo: string[];
 }
 
 const items = new mongoose.Schema({
@@ -42,11 +42,13 @@ const items = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  userinfo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
-    // required: true,
-  },
+  userinfo: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+      // required: true,
+    },
+  ],
 });
 
 items.statics.build = (attr: IItem) => {

@@ -21,6 +21,7 @@ export default async (
       // 유저 정보 삭제하기
       await user.deleteOne({ _id: userId });
       res
+        .clearCookie("hashPw")
         .status(200)
         .json({ message: "정상적으로 회원탈퇴가 처리되었습니다 !" });
     }
