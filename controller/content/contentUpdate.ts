@@ -8,9 +8,10 @@ export default async (
 ): Promise<void | Response> => {
   try {
     const {
-      callinder,
+      startDate,
+      endDate,
       totalCost,
-      day,
+      schedule,
       thumbnail,
       touristSpot,
       title,
@@ -19,12 +20,22 @@ export default async (
     const contentId = req.params.id;
     const userId = res.locals.id;
     if (userId) {
-      if (callinder) {
+      if (startDate) {
         await content.updateOne(
           { _id: contentId },
           {
             $set: {
-              callinder: callinder,
+              startDate: startDate,
+            },
+          }
+        );
+      }
+      if (endDate) {
+        await content.updateOne(
+          { _id: contentId },
+          {
+            $set: {
+              endDate: endDate,
             },
           }
         );
@@ -35,16 +46,6 @@ export default async (
           {
             $set: {
               totalCost: totalCost,
-            },
-          }
-        );
-      }
-      if (day) {
-        await content.updateOne(
-          { _id: contentId },
-          {
-            $set: {
-              day: day,
             },
           }
         );

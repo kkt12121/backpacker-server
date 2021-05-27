@@ -1,14 +1,15 @@
 import mongoose from "mongoose";
 
 interface IContent {
-  callinder: string;
+  startDate: string;
+  endDate: string;
   totalCost: number;
   thumbnail: string[];
-  day: string[];
+  schedule: Array<string[]>;
   title: string;
   touristRegion: string;
   touristSpot: string;
-  items: any[];
+  // items: any[];
   userinfo: string[];
 }
 
@@ -17,19 +18,25 @@ interface contentModelInterface extends mongoose.Model<ContentDoc> {
 }
 
 interface ContentDoc extends mongoose.Document {
-  callinder: string;
+  startDate: string;
+  endDate: string;
   totalCost: number;
   thumbnail: string[];
-  day: string[];
+  schedule: Array<string[]>;
   title: string;
   touristRegion: string;
   touristSpot: string;
-  items: any[];
+  // items: any[];
   userinfo: string[];
 }
 
 const contents = new mongoose.Schema({
-  callinder: {
+  startDate: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  endDate: {
     type: String,
     required: true,
     trim: true,
@@ -43,16 +50,19 @@ const contents = new mongoose.Schema({
       type: String,
     },
   ],
-  items: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "item", required: true },
+  // items: [
+  //   { type: mongoose.Schema.Types.ObjectId, ref: "item", required: true },
+  // ],
+  schedule: [
+    [{ type: mongoose.Schema.Types.ObjectId, ref: "item", required: true }],
   ],
-  day: [
-    {
-      type: String,
-      required: true,
-      trip: true,
-    },
-  ],
+  // day: [
+  //   {
+  //     type: String,
+  //     required: true,
+  //     trip: true,
+  //   },
+  // ],
   touristSpot: {
     type: String,
     required: true,
