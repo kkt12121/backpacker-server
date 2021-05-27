@@ -30,6 +30,7 @@ export default async (
               process.env.JWT_ACCESS_SECRET,
               { expiresIn: "5h" }
             );
+            console.log(accessToken);
             const refreshToken = jwt.sign(
               { _id: userInfo._id },
               process.env.JWT_REFRESH_SECRET,

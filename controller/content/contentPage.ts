@@ -16,9 +16,9 @@ export default async (
       // 해당하는 content를 찾는다
       const findContent: any = await content.findOne({ _id: req.params.id });
       const contentInfo = {
-        callinder: findContent.callinder,
+        startDate: findContent.startDate,
+        endDate: findContent.endDate,
         totalCost: findContent.totalCost,
-        day: findContent.day,
         thumbnail: findContent.thumbnail,
         title: findContent.title,
         touristRegion: findContent.touristRegion,
@@ -34,14 +34,23 @@ export default async (
         phone: findUser.phone,
       };
       // content안에 있는 item들을 찾는다
-      const itemIdArr = findContent.items;
+      // [[경복궁,남산],[강남],[서울]]
+      const itemIdArr = findContent.schedule;
       let itemArr: any = [];
       for (let i = 0; i < itemIdArr.length; i++) {
-        const result = await item.find({ _id: itemIdArr[i] });
-        itemArr.push(result);
+        // const result = await item.find({ _id: itemIdArr[i] });
+        // itemArr.push(result);
+        // console.log("기준 !", itemIdArr[i]);
+        const test = []; // [{},{}]
+        for (let el of itemIdArr[i]) {
+          // console.log(el);
+          const findItem = await item.find({ _id: el });
+          test.push(...findItem);
+        }
+        itemArr.push(test);
       }
-      const items = itemArr.map((r: any) => r[0]);
-      res.status(200).json({ contentInfo, userInfo, items });
+      console.log(itemArr);
+      res.status(200).json({ contentInfo, userInfo, itemArr });
     }
   } catch (err) {
     return res.status(500).json(err);
