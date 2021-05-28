@@ -9,7 +9,6 @@ interface IContent {
   title: string;
   touristRegion: string;
   touristSpot: string;
-  // items: any[];
   userinfo: string[];
 }
 
@@ -26,7 +25,6 @@ interface ContentDoc extends mongoose.Document {
   title: string;
   touristRegion: string;
   touristSpot: string;
-  // items: any[];
   userinfo: string[];
 }
 
@@ -50,19 +48,9 @@ const contents = new mongoose.Schema({
       type: String,
     },
   ],
-  // items: [
-  //   { type: mongoose.Schema.Types.ObjectId, ref: "item", required: true },
-  // ],
   schedule: [
     [{ type: mongoose.Schema.Types.ObjectId, ref: "item", required: true }],
   ],
-  // day: [
-  //   {
-  //     type: String,
-  //     required: true,
-  //     trip: true,
-  //   },
-  // ],
   touristSpot: {
     type: String,
     required: true,
@@ -82,7 +70,6 @@ const contents = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
-      // required: true,
     },
   ],
 });

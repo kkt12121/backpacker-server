@@ -3,13 +3,13 @@ import mongoose from "mongoose";
 interface IItem {
   place: string;
   price: number;
-  averagePrice: number;
-  category: string;
-  img: string;
+  averagePrice?: number;
+  category?: string;
+  img?: string;
   mapx: string;
   mapy: string;
   detail: string;
-  tel: string;
+  tel?: string;
   address: string;
   contentId: string;
   userinfo: string[];
@@ -22,12 +22,12 @@ interface itemModelInterface extends mongoose.Model<ItemDoc> {
 interface ItemDoc extends mongoose.Document {
   place: string;
   price: number;
-  averagePrice: number;
-  category: string;
+  averagePrice?: number;
+  category?: string;
   mapx: string;
   mapy: string;
-  img: string;
-  tel: string;
+  img?: string;
+  tel?: string;
   address: string;
   detail: string;
   contentId: string;
@@ -47,12 +47,10 @@ const items = new mongoose.Schema({
   },
   averagePrice: {
     type: Number,
-    required: true,
     default: 0,
   },
   img: {
     type: String,
-    required: true,
     trim: true,
   },
   mapx: {
@@ -77,17 +75,14 @@ const items = new mongoose.Schema({
   },
   address: {
     type: String,
-    required: true,
     trim: true,
   },
   tel: {
     type: String,
-    required: true,
     trim: true,
   },
   category: {
     type: String,
-    required: true,
     trim: true,
   },
   userinfo: [
