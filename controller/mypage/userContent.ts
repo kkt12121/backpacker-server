@@ -14,7 +14,7 @@ export default async (
     } else {
       const findContent = await content
         .find({ userinfo: userId })
-        .select({ _id: 0, __v: 0, items: 0, userinfo: 0 });
+        .select({ __v: 0 });
       return res.status(200).json({ findContent });
     }
   } catch (err) {

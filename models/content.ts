@@ -31,17 +31,14 @@ interface ContentDoc extends mongoose.Document {
 const contents = new mongoose.Schema({
   startDate: {
     type: String,
-    required: true,
     trim: true,
   },
   endDate: {
     type: String,
-    required: true,
     trim: true,
   },
   totalCost: {
     type: Number,
-    required: true,
   },
   thumbnail: [
     {
@@ -53,17 +50,14 @@ const contents = new mongoose.Schema({
   ],
   touristSpot: {
     type: String,
-    required: true,
     trim: true,
   },
   touristRegion: {
     type: String,
-    required: true,
     trim: true,
   },
   title: {
     type: String,
-    required: true,
     trim: true,
   },
   userinfo: [
