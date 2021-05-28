@@ -37,12 +37,10 @@ interface ItemDoc extends mongoose.Document {
 const items = new mongoose.Schema({
   place: {
     type: String,
-    required: true,
     trim: true,
   },
   price: {
     type: Number,
-    required: true,
     default: 0,
   },
   averagePrice: {
@@ -55,22 +53,18 @@ const items = new mongoose.Schema({
   },
   mapx: {
     type: String,
-    required: true,
     trim: true,
   },
   mapy: {
     type: String,
-    required: true,
     trim: true,
   },
   contentId: {
     type: String,
-    required: true,
     trim: true,
   },
   detail: {
     type: String,
-    required: true,
     trim: true,
   },
   address: {
