@@ -33,23 +33,19 @@ export default async (
         password: findUser.password,
         phone: findUser.phone,
       };
-      // content안에 있는 item들을 찾는다
-      // [[경복궁,남산],[강남],[서울]]
+      // content안에 있는 item들을 찾는다.
+      // schedule안에 있는 item id를 찾아서 db에 저장된 item과 일치하는것을
+      // itemArr에 담아서 보낸준다.
       const itemIdArr = findContent.schedule;
       let itemArr: any = [];
       for (let i = 0; i < itemIdArr.length; i++) {
-        // const result = await item.find({ _id: itemIdArr[i] });
-        // itemArr.push(result);
-        // console.log("기준 !", itemIdArr[i]);
-        const test = []; // [{},{}]
+        const test = [];
         for (let el of itemIdArr[i]) {
-          // console.log(el);
           const findItem = await item.find({ _id: el });
           test.push(...findItem);
         }
         itemArr.push(test);
       }
-      console.log(itemArr);
       res.status(200).json({ contentInfo, userInfo, itemArr });
     }
   } catch (err) {

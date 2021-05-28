@@ -8,7 +8,6 @@ export default async (
   next: NextFunction
 ): Promise<void | Response> => {
   try {
-    // schedule: [[{item},{item}],[{item},{item}],[{item},{item},{item}]]
     const {
       startDate,
       endDate,
@@ -19,17 +18,15 @@ export default async (
       title,
       touristRegion,
     } = req.body;
-    // [[경복궁,남산],[강남],[서울]]
     const userId = res.locals.id;
     if (!userId) {
       return res.status(401).json({ message: "로그인 상태가 아닙니다 !" });
     } else {
       if (schedule) {
         // 스케줄에 있는 아이템들을 따로 아이템 필드안에 집어 넣는다.
-        // const idArr: any = [];
         let allIdArr: any = [];
         for (let i = 0; i < schedule.length; i++) {
-          const lib: any = [];
+          const result: any = [];
           for (let data of schedule[i]) {
             const idArr: any = [];
             const itemCost = await item.find({ place: data.place });
@@ -37,7 +34,7 @@ export default async (
               const newItems = item.build({
                 place: data.place,
                 price: data.price,
-                averagePrice: 0,
+                averagePrice: data.price,
                 category: data.category,
                 img: data.img,
                 mapx: data.mapx,
@@ -54,7 +51,6 @@ export default async (
                 .then((data) => data)
                 .then((data) => {
                   idArr.push(data._id);
-                  req.params.itemId = data._id;
                 });
               // console.log(idArr);
             } else {
@@ -102,14 +98,13 @@ export default async (
                 .then((data) => data)
                 .then((data) => {
                   idArr.push(data._id);
-                  req.params.itemId = data._id;
                 });
             }
             for (let el of idArr) {
-              lib.push(el);
+              result.push(el);
             }
           }
-          allIdArr.push(lib);
+          allIdArr.push(result);
         }
         console.log("allIdArr!!!!!", allIdArr);
         const newContent = content.build({

@@ -44,7 +44,7 @@ app.use(
     origin: true,
     methods: "GET, POST, OPTIONS, DELETE, PUT",
     credentials: true,
-    allowedHeaders: ["Content-Type", "*"],
+    // allowedHeaders: ["Content-Type", "*"],
   })
 );
 // 라우터

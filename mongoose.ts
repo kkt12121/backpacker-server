@@ -20,38 +20,38 @@ db.once("open", function () {
 });
 
 // user 샘플정보
-// const newUser = user.build({
-//   name: "김코딩",
-//   email: "test@test",
-//   password: "0000",
-//   nickname: "코린이",
-//   phone: "010-1234-5678",
-// });
-
-// newUser.save(function (error) {
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log("Saved schedule!");
-//   }
-// });
-
-// item 샘플정보
-const newItem = item.build({
-  place: "명동",
-  cost: 45000,
-  averageCost: 90000,
-  img: "명동.jpg",
-  userinfo: "609eb1b2ce51cce5edb53017",
+const newUser = user.build({
+  name: "김코딩",
+  email: "",
+  password: "mine7579",
+  nickname: "코린이",
+  phone: "010-1234-5678",
 });
 
-newItem.save(function (error) {
+newUser.save(function (error) {
   if (error) {
     console.log(error);
   } else {
     console.log("Saved schedule!");
   }
 });
+
+// // item 샘플정보
+// const newItem = item.build({
+//   place: "명동",
+//   cost: 45000,
+//   averageCost: 90000,
+//   img: "명동.jpg",
+//   userinfo: "609eb1b2ce51cce5edb53017",
+// });
+
+// newItem.save(function (error) {
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log("Saved schedule!");
+//   }
+// });
 
 // content 샘플정보
 // const newContent = content.build({
