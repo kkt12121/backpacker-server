@@ -14,10 +14,6 @@ export default async (
     if (!userId) {
       return res.status(401).json({ message: "로그인 상태가 아닙니다 !" });
     } else {
-      // 유저가 작성한 item을 지운다
-      await item.deleteMany({ userinfo: userId });
-      // 유저가 작성한 모든 content를 지운다
-      await content.deleteMany({ userinfo: userId });
       // 유저 정보 삭제하기
       await user.deleteOne({ _id: userId });
       res
