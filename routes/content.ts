@@ -9,5 +9,6 @@ router.put("/:id/update", checkToken, contentController.contentUpdate);
 router.delete("/:id/delete", checkToken, contentController.contentDelete);
 router.get("/:id", contentController.contentPage);
 router.post("/list", contentController.contentList);
+router.put("/:id/invite", checkToken, contentController.contentInvite);
 
 export default router;

@@ -24,15 +24,13 @@ export default async (
         touristRegion: findContent.touristRegion,
         touristSpot: findContent.touristSpot,
       };
-      // content를 작성한 user를 찾는다
-      const findUser: any = await user.findOne({ _id: findContent.userinfo });
-      const userInfo = {
-        email: findUser.email,
-        nickname: findUser.nickname,
-        name: findUser.name,
-        password: findUser.password,
-        phone: findUser.phone,
-      };
+      // content를 작성한 user를 찾는다.
+      const userArr = findContent.userinfo;
+      const userInfo: any = [];
+      for (let id of userArr) {
+        const findUser = await user.find({ _id: id });
+        userInfo.push(...findUser);
+      }
       // content안에 있는 item들을 찾는다.
       // schedule안에 있는 item id를 찾아서 db에 저장된 item과 일치하는것을
       // itemArr에 담아서 보낸준다.
