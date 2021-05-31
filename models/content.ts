@@ -4,7 +4,7 @@ interface IContent {
   startDate: string;
   endDate: string;
   totalCost: number;
-  thumbnail: string[];
+  thumbnail: Array<string[]>;
   schedule: Array<string[]>;
   title: string;
   touristRegion: string;
@@ -20,7 +20,7 @@ interface ContentDoc extends mongoose.Document {
   startDate: string;
   endDate: string;
   totalCost: number;
-  thumbnail: string[];
+  thumbnail: Array<string[]>;
   schedule: Array<string[]>;
   title: string;
   touristRegion: string;
@@ -40,11 +40,7 @@ const contents = new mongoose.Schema({
   totalCost: {
     type: Number,
   },
-  thumbnail: [
-    {
-      type: String,
-    },
-  ],
+  thumbnail: [[String]],
   schedule: [
     [{ type: mongoose.Schema.Types.ObjectId, ref: "item", required: true }],
   ],

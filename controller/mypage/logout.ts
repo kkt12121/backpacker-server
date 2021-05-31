@@ -23,7 +23,11 @@ export default async (
           }
         );
         res
-          .clearCookie("hashPw")
+          .cookie("hashPw", "", {
+            httpOnly: true,
+            maxAge: 0,
+            domain: "backpackerz.shop",
+          })
           .status(200)
           .send({ message: "로그아웃 성공 !" });
       } else {

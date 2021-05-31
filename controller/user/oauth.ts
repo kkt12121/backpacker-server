@@ -66,7 +66,11 @@ export default async (
                   console.log(err);
                 } else {
                   return res
-                    .cookie("hashPw", alreadyUser.password)
+                    .cookie("hashPw", alreadyUser.password, {
+                      httpOnly: true,
+                      maxAge: 60 * 60 * 24 * 1000,
+                      domain: "backpackerz.shop",
+                    })
                     .status(200)
                     .json({
                       accessToken: accessToken,
@@ -127,7 +131,11 @@ export default async (
                   console.log(err);
                 } else {
                   return res
-                    .cookie("hashPw", findUser.password)
+                    .cookie("hashPw", findUser.password, {
+                      httpOnly: true,
+                      maxAge: 60 * 60 * 24 * 1000,
+                      domain: "backpackerz.shop",
+                    })
                     .status(200)
                     .json({
                       accessToken: accessToken,
