@@ -27,7 +27,7 @@ export default async (
           client_secret: clientSecret,
           code: authorizationCode,
           grant_type: "authorization_code",
-          redirect_uri: "http://localhost:3000",
+          redirect_uri: "https://backpackerz.shop",
         },
       })
         .then(async (data) => {
@@ -109,7 +109,6 @@ export default async (
             const findUser: any = await user.findOne({
               email: data.data.email,
             });
-            // console.log("findUser입니다 !!!!!!!!!!", findUser);
             const accessToken = jwt.sign(
               { _id: findUser._id },
               process.env.JWT_ACCESS_SECRET,
@@ -121,7 +120,6 @@ export default async (
               { expiresIn: "1d" }
             );
             console.log("신규유저 accessToken!!!!!!!!!!!!!", accessToken);
-            // console.log("refreshToken!!!!!!!!!!!!!", refreshToken);
             await user.updateOne(
               { _id: findUser._id },
               { $set: { refreshToken: refreshToken } },
