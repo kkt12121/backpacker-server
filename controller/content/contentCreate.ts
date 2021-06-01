@@ -100,7 +100,6 @@ export default async (
         }
         allIdArr.push(result);
       }
-      console.log("allIdArr!!!!!", allIdArr);
       // content 작성
       const newContent = content.build({
         startDate: startDate,

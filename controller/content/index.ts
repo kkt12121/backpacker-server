@@ -4,6 +4,7 @@ import contentUpdate from "./contentUpdate";
 import contentInvite from "./contentInvite";
 import contentPage from "./contentPage";
 import contentList from "./contentList";
+import itemAverageCost from "./itemAverageCost";
 
 export = {
   contentCreate,
@@ -12,4 +13,5 @@ export = {
   contentInvite,
   contentPage,
   contentList,
+  itemAverageCost,
 };
