@@ -14,6 +14,7 @@ export default async (
       const selectTouristSpot = await content.find({
         touristSpot: touristSpot,
       });
+
       // 없다면 경고 메세지를 보내고 있으면 정보를 보낸다
       if (selectTouristSpot.length === 0) {
         return res.status(400).json({ message: "해당하는 정보가 없습니다 !" });

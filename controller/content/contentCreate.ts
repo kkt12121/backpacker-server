@@ -45,16 +45,13 @@ export default async (
               contentId: data.contentId,
               userinfo: userId,
             });
-            // console.log("newItems성공 !", newItems);
             await newItems
               .save()
               .then((data) => data)
               .then((data) => {
                 idArr.push(data._id);
               });
-            // console.log(idArr);
           } else {
-            // const idArr: any = [];
             //  db에 place가 존재한다면 평균값을 구해야한다
             // 장소별로 가격을 배열안에 넣는다
             const itemCostArr: number[] = [];
@@ -63,7 +60,6 @@ export default async (
                 return itemCostArr.push(el.price);
               }
             });
-            // console.log(itemCostArr);
             // // 배열안에 있는 아이템별 비용의 합계를 구한다
             const totalItemCost = itemCostArr.reduce(
               (acc: number, cur: number) => {
@@ -72,7 +68,6 @@ export default async (
               },
               0
             );
-            // console.log(totalItemCost);
             // 비용의 평균을 내고 반올림한다
             const averageItemCost = Math.floor(
               totalItemCost / itemCostArr.length
@@ -92,7 +87,6 @@ export default async (
               contentId: data.contentId,
               userinfo: userId,
             });
-            // console.log("newItems성공 !", newItems);
             await newItems
               .save()
               .then((data) => data)
@@ -107,6 +101,7 @@ export default async (
         allIdArr.push(result);
       }
       console.log("allIdArr!!!!!", allIdArr);
+      // content 작성
       const newContent = content.build({
         startDate: startDate,
         endDate: endDate,
@@ -120,6 +115,7 @@ export default async (
       });
       await newContent.save();
       res.status(201).json({ message: "컨텐츠 작성 완료 !" });
+      // 현재 content 정보를 불러오기 위해 params에 content _id값을 저장시킨다.
       req.params.id = newContent._id;
     } else {
       return res.status(400).json({ message: "스케줄이 비어있습니다 !" });

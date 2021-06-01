@@ -33,7 +33,7 @@ mongoose.connect(
 //     useUnifiedTopology: true,
 //   },
 //   () => {
-//     console.log("connected to database");
+//     console.log("atlas연결 성공 !");
 //   }
 // );
 
@@ -50,7 +50,6 @@ app.use(
 // 라우터
 app.use("/user", routes.user);
 app.use("/content", routes.content);
-app.use("/api", routes.api);
 app.use("/mypage", routes.mypage);
 
 app.get("/", function (req, res) {
