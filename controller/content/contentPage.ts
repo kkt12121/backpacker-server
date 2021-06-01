@@ -15,15 +15,32 @@ export default async (
     } else {
       // 해당하는 content를 찾는다
       const findContent: any = await content.findOne({ _id: req.params.id });
+      // 현재 startDate와 endDate를 yyyy-mm-dd 형태로 변환해서 클라이언트로 보내준다.
+      const getFormatDate: any = (date: any) => {
+        var year = date.getFullYear(); //yyyy
+        var month = 1 + date.getMonth(); //M
+        month = month >= 10 ? month : "0" + month; //month 두자리로 저장
+        var day = date.getDate(); //d
+        day = day >= 10 ? day : "0" + day; //day 두자리로 저장
+        return year + "/" + month + "/" + day; //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+      };
+      // startDate
+      let objStartDate = new Date(findContent.startDate);
+      objStartDate = getFormatDate(objStartDate);
+      // endDate
+      let objEndDate = new Date(findContent.endDate);
+      objEndDate = getFormatDate(objEndDate);
+
       const contentInfo = {
-        startDate: findContent.startDate,
-        endDate: findContent.endDate,
+        startDate: objStartDate,
+        endDate: objEndDate,
         totalCost: findContent.totalCost,
         thumbnail: findContent.thumbnail,
         title: findContent.title,
         touristRegion: findContent.touristRegion,
         touristSpot: findContent.touristSpot,
       };
+
       // content를 작성한 user를 찾는다.
       const userArr = findContent.userinfo;
       const userInfo: any = [];

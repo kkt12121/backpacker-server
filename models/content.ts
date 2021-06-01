@@ -42,7 +42,12 @@ const contents = new mongoose.Schema({
   },
   thumbnail: [[String]],
   schedule: [
-    [{ type: mongoose.Schema.Types.ObjectId, ref: "item", required: true }],
+    [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "item",
+      },
+    ],
   ],
   touristSpot: {
     type: String,
