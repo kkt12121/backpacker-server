@@ -13,7 +13,6 @@ export default async (
     totalCost,
     schedule,
     thumbnail,
-    touristSpot,
     title,
     touristRegion,
   } = req.body;
@@ -21,8 +20,8 @@ export default async (
   if (!userId) {
     return res.status(401).json({ message: "로그인 상태가 아닙니다 !" });
   } else {
-    if (Object.keys(schedule[0][0]).length > 0) {
-      // Object.keys(schedule[0][0]).length > 0 => contentWrite 페이지에 기본값이 [[{}]]
+    if (Object.keys(schedule[0][0]).length !== 0) {
+      // Object.keys(schedule[0][0]).length !== 0 => contentWrite 페이지에 기본값이 [[{}]]
       // 스케줄에 있는 아이템들을 따로 아이템 필드안에 집어 넣는다.
       let allIdArr: any = [];
       for (let i = 0; i < schedule.length; i++) {
@@ -109,11 +108,12 @@ export default async (
         title: title,
         touristRegion: touristRegion,
         schedule: allIdArr,
-        touristSpot: touristSpot,
         userinfo: userId,
       });
       await newContent.save();
-      res.status(201).json({ message: "컨텐츠 작성 완료 !" });
+      res
+        .status(201)
+        .json({ message: "컨텐츠 작성 완료 !", id: newContent._id });
       // 현재 content 정보를 불러오기 위해 params에 content _id값을 저장시킨다.
       req.params.id = newContent._id;
     } else {
