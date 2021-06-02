@@ -38,7 +38,6 @@ export default async (
         thumbnail: findContent.thumbnail,
         title: findContent.title,
         touristRegion: findContent.touristRegion,
-        touristSpot: findContent.touristSpot,
       };
 
       // content를 작성한 user를 찾는다.

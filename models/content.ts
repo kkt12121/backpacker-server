@@ -8,7 +8,6 @@ interface IContent {
   schedule: Array<string[]>;
   title: string;
   touristRegion: string;
-  touristSpot: string;
   userinfo: string[];
 }
 
@@ -24,7 +23,6 @@ interface ContentDoc extends mongoose.Document {
   schedule: Array<string[]>;
   title: string;
   touristRegion: string;
-  touristSpot: string;
   userinfo: string[];
 }
 
@@ -49,10 +47,6 @@ const contents = new mongoose.Schema({
       },
     ],
   ],
-  touristSpot: {
-    type: String,
-    trim: true,
-  },
   touristRegion: {
     type: String,
     trim: true,

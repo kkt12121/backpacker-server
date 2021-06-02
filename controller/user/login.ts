@@ -28,13 +28,13 @@ export default async (
             const accessToken = jwt.sign(
               { _id: userInfo._id },
               process.env.JWT_ACCESS_SECRET,
-              { expiresIn: "5h" }
+              { expiresIn: "1m" }
             );
             console.log(accessToken);
             const refreshToken = jwt.sign(
               { _id: userInfo._id },
               process.env.JWT_REFRESH_SECRET,
-              { expiresIn: "1d" }
+              { expiresIn: "2m" }
             );
             await user.updateOne(
               { _id: userInfo._id },
