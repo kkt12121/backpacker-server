@@ -7,7 +7,6 @@ export default async (
   next: NextFunction
 ): Promise<void | Response> => {
   try {
-    console.log(res.locals.id);
     const userId = res.locals.id;
     if (!userId) {
       return res.status(401).json({ message: "로그인 상태가 아닙니다 !" });
@@ -22,7 +21,7 @@ export default async (
             },
           }
         );
-        res
+        return res
           .cookie("hashPw", "", {
             httpOnly: true,
             maxAge: 0,
@@ -35,6 +34,7 @@ export default async (
       }
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json(err);
   }
 };

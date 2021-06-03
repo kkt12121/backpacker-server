@@ -60,9 +60,10 @@ export default async (
         }
         itemArr.push(test);
       }
-      res.status(200).json({ contentInfo, userInfo, itemArr });
+      return res.status(200).json({ contentInfo, userInfo, itemArr });
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json(err);
   }
 };

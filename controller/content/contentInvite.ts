@@ -16,12 +16,12 @@ export default async (
         { _id: contentId },
         { $push: { userinfo: userId } }
       );
-      res.status(200).json({ message: "친구초대 완료 !" });
+      return res.status(200).json({ message: "친구초대 완료 !" });
     } else {
-      res.status(400).json({ message: "없는 게시물입니다 !" });
+      return res.status(400).json({ message: "없는 게시물입니다 !" });
     }
   } catch (err) {
-    console.log(err)
+    console.log(err);
     return res.status(500).json(err);
   }
 };

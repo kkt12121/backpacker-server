@@ -28,19 +28,19 @@ export default async (
             const accessToken = jwt.sign(
               { _id: userInfo._id },
               process.env.JWT_ACCESS_SECRET,
-              { expiresIn: "1m" }
+              { expiresIn: "30d" }
             );
             console.log(accessToken);
             const refreshToken = jwt.sign(
               { _id: userInfo._id },
               process.env.JWT_REFRESH_SECRET,
-              { expiresIn: "2m" }
+              { expiresIn: "60d" }
             );
             await user.updateOne(
               { _id: userInfo._id },
               { $set: { refreshToken: refreshToken } },
               { upsert: true },
-              (err) => {
+              (err: Error) => {
                 if (err) {
                   console.log(err);
                 } else {
@@ -68,6 +68,7 @@ export default async (
       checkPw();
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json(err);
   }
 };

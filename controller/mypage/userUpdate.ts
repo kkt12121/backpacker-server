@@ -8,7 +8,6 @@ export default async (
   next: NextFunction
 ): Promise<void | Response> => {
   try {
-    console.log(res.locals.id);
     const userId = res.locals.id;
     let { password, name, nickname, phone } = req.body;
     if (!userId) {
@@ -85,10 +84,10 @@ export default async (
           }
         );
       }
-
-      res.status(200).json({ message: "유저 정보를 수정하였습니다 !" });
+      return res.status(200).json({ message: "유저 정보를 수정하였습니다 !" });
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json(err);
   }
 };

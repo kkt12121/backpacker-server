@@ -71,7 +71,7 @@ export default async (
             const averageItemCost = Math.floor(
               totalItemCost / itemCostArr.length
             );
-            // console.log(averageItemCost);
+
             const newItems = item.build({
               place: data.place,
               price: data.price,
@@ -110,12 +110,12 @@ export default async (
         schedule: allIdArr,
         userinfo: userId,
       });
-      await newContent.save();
-      res
-        .status(201)
-        .json({ message: "컨텐츠 작성 완료 !", id: newContent._id });
       // 현재 content 정보를 불러오기 위해 params에 content _id값을 저장시킨다.
       req.params.id = newContent._id;
+      await newContent.save();
+      return res
+        .status(201)
+        .json({ message: "컨텐츠 작성 완료 !", id: newContent._id });
     } else {
       return res.status(400).json({ message: "스케줄이 비어있습니다 !" });
     }
