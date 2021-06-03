@@ -46,12 +46,12 @@ export default async (
             const accessToken = jwt.sign(
               { _id: alreadyUser._id },
               process.env.JWT_ACCESS_SECRET,
-              { expiresIn: "1m" }
+              { expiresIn: "30d" }
             );
             const refreshToken = jwt.sign(
               { _id: alreadyUser._id },
               process.env.JWT_REFRESH_SECRET,
-              { expiresIn: "2m" }
+              { expiresIn: "60d" }
             );
             console.log(
               "이미 존재하는 유저의 accessToken입니다 !",
@@ -112,12 +112,12 @@ export default async (
             const accessToken = jwt.sign(
               { _id: findUser._id },
               process.env.JWT_ACCESS_SECRET,
-              { expiresIn: "1m" }
+              { expiresIn: "30d" }
             );
             const refreshToken = jwt.sign(
               { _id: findUser._id },
               process.env.JWT_REFRESH_SECRET,
-              { expiresIn: "2m" }
+              { expiresIn: "60d" }
             );
             console.log("신규유저 accessToken!!!!!!!!!!!!!", accessToken);
             await user.updateOne(
@@ -145,6 +145,7 @@ export default async (
           }
         })
         .catch((err) => {
+          console.log(err);
           return err;
         });
     } else {
@@ -153,6 +154,7 @@ export default async (
         .json({ message: "authorizationCode가 없습니다 !" });
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json(err);
   }
 };

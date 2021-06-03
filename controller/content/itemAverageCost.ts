@@ -29,7 +29,7 @@ export default async (
         const averageItemCost = Math.floor(totalItemCost / itemCostArr.length);
         res.status(200).json({ averageCost: averageItemCost });
       } else {
-        res.status(200).json({ averageCost: 0 });
+        return res.status(200).json({ averageCost: 0 });
       }
     } else {
       return res.status(400).json({ message: "장소를 입력해 주세요 !" });

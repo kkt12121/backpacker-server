@@ -40,8 +40,7 @@ export default async (
 
         // 삭제할 게시물을 db에서 찾아서 지운다
         await content.deleteOne({ _id: contentId });
-
-        res.status(200).json({ message: "게시물을 삭제 하였습니다 !" });
+        return res.status(200).json({ message: "게시물을 삭제 하였습니다 !" });
       } else {
         return res.status(401).json({ message: "로그인 상태가 아닙니다 !" });
       }
@@ -49,6 +48,7 @@ export default async (
       return res.status(400).json({ message: "존재하지 않는 게시물 입니다 !" });
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json(err);
   }
 };

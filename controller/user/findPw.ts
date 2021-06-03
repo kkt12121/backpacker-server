@@ -26,14 +26,12 @@ export default async (
     if (err) {
       return res.status(400).json({ message: "솔트생성에 실패했습니다 !" });
     }
-    console.log("salt입니다 = ", salt);
     // 솔트생성 성공시 해쉬화 진행
     bcrypt.hash(randomString, salt, async (err, hash) => {
       if (err)
         return res.status(400).json({
           message: "비밀번호 해쉬화에 실패했습니다.",
         });
-      console.log("hash입니다 = ", hash);
       randomString = hash;
       // 발급받은 비밀번호를 사용하기 위해 유저정보에 비밀번호를 발급받은 해쉬화한 임시비밀번호로 바꿔준다
       await user.updateOne(

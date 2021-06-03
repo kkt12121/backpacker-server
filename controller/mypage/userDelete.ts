@@ -9,14 +9,13 @@ export default async (
   next: NextFunction
 ): Promise<void | Response> => {
   try {
-    console.log(res.locals.id);
     const userId = res.locals.id;
     if (!userId) {
       return res.status(401).json({ message: "로그인 상태가 아닙니다 !" });
     } else {
       // 유저 정보 삭제하기
       await user.deleteOne({ _id: userId });
-      res
+      return res
         .cookie("hashPw", "", {
           httpOnly: true,
           maxAge: 0,
@@ -26,6 +25,7 @@ export default async (
         .json({ message: "정상적으로 회원탈퇴가 처리되었습니다 !" });
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json(err);
   }
 };
