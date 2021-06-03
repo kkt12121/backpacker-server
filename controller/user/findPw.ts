@@ -26,12 +26,14 @@ export default async (
     if (err) {
       return res.status(400).json({ message: "솔트생성에 실패했습니다 !" });
     }
+    console.log("salt입니다 = ", salt);
     // 솔트생성 성공시 해쉬화 진행
     bcrypt.hash(randomString, salt, async (err, hash) => {
       if (err)
         return res.status(400).json({
           message: "비밀번호 해쉬화에 실패했습니다.",
         });
+      console.log("hash입니다 = ", hash);
       randomString = hash;
       // 발급받은 비밀번호를 사용하기 위해 유저정보에 비밀번호를 발급받은 해쉬화한 임시비밀번호로 바꿔준다
       await user.updateOne(
@@ -46,16 +48,21 @@ export default async (
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "kkt34343@gmail.com",
-      pass: process.env.GOOGLE_SECRETPW,
+      user: "backpackerz27@gmail.com",
+      pass: process.env.NODEMAILER_PASSWORD,
     },
   });
 
   var mailOptions = {
-    from: "kkt34343@gmail.com",
+    from: "backpackerz27@gmail.com",
     to: email,
     subject: "임시 비밀번호 안내",
-    text: `${findUser.nickname} 님의 임시 비밀번호는 ${randomString}입니다. 로그인 후 마이페이지에서 비밀번호를 변경해주시길 바랍니다 !`,
+    html:
+      "<h1 >backpacerz에서 새로운 비밀번호를 알려드립니다.</h1> <h2> 비밀번호 : " +
+      randomString +
+      "</h2>" +
+      '<h3 style="color: crimson;">임시 비밀번호로 로그인 하신 후, 마이페이지 에서 반드시 비밀번호를 수정해 주세요.</h3>' +
+      '<img src="https://images.velog.io/images/kkt12121/post/af48087a-7f35-4fa8-ae10-fc484235ed46/image.png">',
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
