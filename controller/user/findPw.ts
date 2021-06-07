@@ -62,7 +62,7 @@ export default async (
       randomString +
       "</h2>" +
       '<h3 style="color: crimson;">임시 비밀번호로 로그인 하신 후, 마이페이지 에서 반드시 비밀번호를 수정해 주세요.</h3>' +
-      '<img src="https://images.velog.io/images/kkt12121/post/af48087a-7f35-4fa8-ae10-fc484235ed46/image.png">',
+      '<img src="https://cdn.discordapp.com/attachments/830042569349529635/851367188550909982/75388b72bbdacd05.png">',
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
