@@ -12,30 +12,30 @@ const atlas = process.env.ATLAS_URI;
 const port = 4000;
 const app = express();
 
-mongoose.connect(
-  "mongodb://localhost:27017/backpacker",
-  {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  () => {
-    console.log("connected to database");
-  }
-);
-
-// 배포용 아틀라스 연결
 // mongoose.connect(
-//   atlas,
+//   "mongodb://localhost:27017/backpacker",
 //   {
 //     useCreateIndex: true,
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true,
 //   },
 //   () => {
-//     console.log("atlas연결 성공 !");
+//     console.log("connected to database");
 //   }
 // );
+
+// 배포용 아틀라스 연결
+mongoose.connect(
+  atlas,
+  {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  () => {
+    console.log("atlas연결 성공 !");
+  }
+);
 
 app.use(cookieParser());
 app.use(json());
@@ -51,6 +51,10 @@ app.use(
 app.use("/user", routes.user);
 app.use("/content", routes.content);
 app.use("/mypage", routes.mypage);
+
+setInterval(() => {
+  https.get("https://server.backpacker.monster");
+}, 600000);
 
 app.get("/", function (req, res) {
   res.send("<h1>hi friend!</h1>");
